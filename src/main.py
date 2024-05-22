@@ -1,9 +1,11 @@
-import sys 
+import  os
 from fibonacci import fibonacci
 
 
-if (len(sys.argv) != 2):
-    print("Debes especificar un único argumento con la longitud de la serie")
+LENGTH = os.getenv('LENGTH')
+
+if (not LENGTH):
+    print("Debes especificar la longitud de la serie en la variable LENGTH")
     exit(-1)
-print(f'La serie con longitud {sys.argv[1]} es :')
-print(fibonacci(length=int(sys.argv[1])))
+print(f'La serie con longitud {LENGTH} es :')
+print(fibonacci(length=int(LENGTH)))
