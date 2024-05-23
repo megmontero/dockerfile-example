@@ -24,6 +24,23 @@ pipeline{
             }
         }
 
+        stage('Code Analysis'){
+            environment{
+                scannerHome= tool 'Sonar'
+            }
+            steps{
+                script{
+                    withSonarQubeEnv('Sonar'){
+                        sh "${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=$project \
+                        -Dsonar.projectName=$project \
+                        -Dsonar.projectVersion=$projectVersion \
+                        -Dsonar.sources=./"
+                    }
+                }
+            }
+        }
+
         stage('Build'){
             steps{
                 script{
